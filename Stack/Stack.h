@@ -141,6 +141,6 @@ bool Stack<T>::isEmpty() const {
 
 template <class T>
 size_t Stack<T>::size() const {
-    return _pimpl->isEmpty();
+    return _pimpl->size();
 }
 
