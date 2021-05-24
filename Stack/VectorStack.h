@@ -5,8 +5,7 @@
 
 template <class T>
 class VectorStack : public StackImplementation<T> {
-    Vector<T> vector;
-
+    Vector<T> _vector;
 public:
     VectorStack();
     VectorStack(const VectorStack<T>& other);
@@ -18,28 +17,28 @@ public:
     ~VectorStack() = default;
 
 
-    void push(const T& value);
-    void pop();
-    const T& top() const;
-    T& top();
-    bool isEmpty() const;
-    size_t size() const;
+    void push(const T& value) override;
+    void pop() override;
+    const T& top() const override;
+    T& top() override;
+    bool isEmpty() const override;
+    size_t size() const override;
 
 };
 
 template<class T>
 VectorStack<T>::VectorStack() {
-    vector = Vector<T>();
+    _vector = Vector<T>();
 }
 
 template<class T>
 VectorStack<T>::VectorStack(const VectorStack<T>& other) {
-    vector = other.vector;
+    _vector = other._vector;
 }
 
 template<class T>
 VectorStack<T>::VectorStack(VectorStack<T>&& other) noexcept {
-    vector = std::move(other.vector);
+    _vector = std::move(other._vector);
 }
 
 template<class T>
@@ -53,7 +52,7 @@ VectorStack<T>& VectorStack<T>::operator=(const VectorStack& other) {
 template<class T>
 VectorStack<T>& VectorStack<T>::operator=(VectorStack&& other) noexcept {
     if (this != &other) {
-        vector = std::move(other.vector);
+        _vector = std::move(other._vector);
     }
     return *this;
 }
@@ -61,30 +60,30 @@ VectorStack<T>& VectorStack<T>::operator=(VectorStack&& other) noexcept {
 
 template<class T>
 void VectorStack<T>::push(const T& value) {
-    vector.pushBack(value);
+    _vector.pushBack(value);
 }
 
 template<class T>
 void VectorStack<T>::pop() {
-    vector.popBack();
+    _vector.popBack();
 }
 
 template<class T>
 const T& VectorStack<T>::top() const {
-    return vector[vector.size() - 1];
+    return _vector[_vector.size() - 1];
 }
 
 template<class T>
 T& VectorStack<T>::top()  {
-    return vector[vector.size() - 1];
+    return _vector[_vector.size() - 1];
 }
 template<class T>
 bool VectorStack<T>::isEmpty() const {
-    return vector.size() == 0;
+    return _vector.size() == 0;
 }
 
 template<class T>
 size_t VectorStack<T>::size() const {
-    return vector.size();
+    return _vector.size();
 }
 

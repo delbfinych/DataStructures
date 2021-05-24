@@ -6,8 +6,7 @@
 
 template <class T>
 class ListStack : public StackImplementation<T> {
-    List<T> list;
-
+    List<T> _list;
 public:
     ListStack();
     ListStack(const ListStack<T>& other);
@@ -19,27 +18,27 @@ public:
     ~ListStack() = default;
 
 
-    void push(const T& value);
-    void pop();
-    const T& top() const;
-    T& top();
-    bool isEmpty() const;
-    size_t size() const;
+    void push(const T& value) override;
+    void pop() override;
+    const T& top() const override;
+    T& top() override;
+    bool isEmpty() const override;
+    size_t size() const override;
 };
 
 template<class T>
 ListStack<T>::ListStack() {
-    list = List<T>();
+    _list = List<T>();
 }
 
 template<class T>
 ListStack<T>::ListStack(const ListStack<T>& other) {
-    list = other.list;
+    _list = other._list;
 }
 
 template<class T>
 ListStack<T>::ListStack(ListStack<T>&& other) noexcept {
-    list = std::move(other.list);
+    _list = std::move(other._list);
 }
 
 template<class T>
@@ -53,7 +52,7 @@ ListStack<T>& ListStack<T>::operator=(const ListStack& other) {
 template<class T>
 ListStack<T>& ListStack<T>::operator=(ListStack&& other) noexcept {
     if (this != &other) {
-        list = std::move(other.list);
+        _list = std::move(other._list);
     }
     return *this;
 }
@@ -61,31 +60,31 @@ ListStack<T>& ListStack<T>::operator=(ListStack&& other) noexcept {
 
 template<class T>
 void ListStack<T>::push(const T& value) {
-    list.pushFront(value);
+    _list.pushFront(value);
 }
 
 template<class T>
 void ListStack<T>::pop() {
-    list.popFront();
+    _list.popFront();
 }
 
 template<class T>
 const T& ListStack<T>::top() const {
-    return list.front();
+    return _list.front();
 }
 
 template<class T>
 T& ListStack<T>::top() {
-    return list.front();
+    return _list.front();
 }
 
 template<class T>
 bool ListStack<T>::isEmpty() const {
-    return list.empty();
+    return _list.empty();
 }
 
 template<class T>
 size_t ListStack<T>::size() const {
-    return list.size();
+    return _list.size();
 }
 

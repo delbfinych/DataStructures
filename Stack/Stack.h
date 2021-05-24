@@ -43,7 +43,7 @@ public:
 	// размер 
 	size_t size() const;
 private:
-	StackImplementation<T>* _pimpl = nullptr;
+    StackImplementation<T>* _pimpl = nullptr;
 	StackContainer _containerType;
 };
 

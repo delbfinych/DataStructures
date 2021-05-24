@@ -2,6 +2,8 @@
 #include "SinglyLinkedList/List.h"
 #include "Vector/vector.h"
 #include "Stack/Stack.h"
+#include "Queue/Queue.h"
+
 template<class T>
 bool isOdd(const T& val) {
     return val % 2 == 1;
@@ -24,13 +26,20 @@ template<class T>
 T addFive(const T& val) {
     return val + 5;
 }
+class Kek {
+public:
+    int& _ref;
+
+
+};
 int main() {
 
-Stack<int> st(StackContainer::List);
-st.push(3);
-st.push(4);
-st.pop();
-std::cout << st.top();
+
+Queue<int> q(QueueContainer::List);
+q.push(3);
+q.push(4);
+
+std::cout << q.front();
 
 //    std::cout << std::endl;
 //    for (size_t i = 0; i < l.size(); ++i) {
