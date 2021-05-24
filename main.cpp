@@ -26,18 +26,16 @@ template<class T>
 T addFive(const T& val) {
     return val + 5;
 }
-class Kek {
-public:
-    int& _ref;
 
-
-};
 int main() {
 
 
-Queue<int> q(QueueContainer::List);
-q.push(3);
-q.push(4);
+Queue<int> q(QueueContainer::Vector);
+    q.push(3);
+    q.pop();
+    q.push(4);
+auto q1(q);
+
 
 std::cout << q.front();
 

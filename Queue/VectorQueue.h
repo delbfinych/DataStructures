@@ -63,17 +63,17 @@ void VectorQueue<T>::push(const T& value) {
 
 template<class T>
 void VectorQueue<T>::pop() {
-    _vector.popBack();
+    _vector.erase(0);
 }
 
 template<class T>
 const T& VectorQueue<T>::front() const {
-    return _vector[_vector.size() - 1];
+    return _vector[0];
 }
 
 template<class T>
 T& VectorQueue<T>::front() {
-    return _vector[_vector.size() - 1];
+    return _vector[0];
 }
 
 template<class T>

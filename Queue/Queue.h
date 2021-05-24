@@ -40,7 +40,7 @@ private:
 };
 
 template<class T>
-Queue<T>::Queue(QueueContainer container) {
+Queue<T>::Queue(QueueContainer container): _containerType(container) {
     switch (container)
     {
         case QueueContainer::List: {
@@ -62,15 +62,17 @@ Queue<T>::Queue(const T* valueArray, size_t arraySize, QueueContainer container)
 }
 
 template<class T>
-Queue<T>::Queue(const Queue& other) {
+Queue<T>::Queue(const Queue& other): Queue<T>(other._containerType) {
+
+
     switch (_containerType)
     {
         case QueueContainer::List: {
-            _pimpl = new ListQueue<T>(*(static_cast<ListQueue<T>*>(other._pimpl)));
+            _pimpl = new ListQueue<T>((ListQueue<T>&)(*other._pimpl));
             break;
         }
         case QueueContainer::Vector: {
-            _pimpl = new VectorQueue<T>(*(static_cast<VectorQueue<T>*>(other._pimpl)));
+            _pimpl = new VectorQueue<T>((VectorQueue<T>&)(*other._pimpl));
             break;
         }
         default:
