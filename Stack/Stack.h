@@ -76,11 +76,11 @@ Stack<T>::Stack(const Stack& other): Stack<T>(other._containerType) {
     switch (_containerType)
     {
         case StackContainer::List: {
-            _pimpl = new ListStack<T>(*(static_cast<ListStack<T>*>(other._pimpl)));
+            _pimpl = new ListStack<T>((ListStack<T>&)(*other._pimpl));
             break;
         }
         case StackContainer::Vector: {
-            _pimpl = new VectorStack<T>(*(static_cast<VectorStack<T>*>(other._pimpl)));
+            _pimpl = new VectorStack<T>((VectorStack<T>&)(*other._pimpl));
             break;
         }
         default:

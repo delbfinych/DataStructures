@@ -30,14 +30,15 @@ T addFive(const T& val) {
 int main() {
 
 
-Queue<int> q(QueueContainer::Vector);
+Stack<int> q(StackContainer::Vector);
     q.push(3);
-    q.pop();
+
     q.push(4);
+    q.pop();
 auto q1(q);
 
 
-std::cout << q.front();
+std::cout << q.top();
 
 //    std::cout << std::endl;
 //    for (size_t i = 0; i < l.size(); ++i) {
