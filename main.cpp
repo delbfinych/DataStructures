@@ -30,13 +30,21 @@ T addFive(const T& val) {
 
 int main() {
 
+    Vector<int> v;
+    v.pushBack(1);
+    v.pushBack(2);
+    v.pushBack(3);
+    v.insert(1, 10);
+    for (auto i: v) {
+        std::cout << i << " ";
+    }
 
-Stack<int> q(StackContainer::List);
-
-    auto q1(q);
-
-
-std::cout << q.top();
+//Stack<int> q(StackContainer::List);
+//
+//    auto q1(q);
+//
+//
+//std::cout << q.top();
 
 //    std::cout << std::endl;
 //    for (size_t i = 0; i < l.size(); ++i) {

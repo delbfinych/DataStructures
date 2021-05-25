@@ -171,10 +171,8 @@ void Vector<T>::insert(size_t idx, const T& value) {
         _data[_size] = value;
     }
     else {
-        // идея на будущее
-        auto copy = value;
         memcpy(_data + idx + 1, _data + idx, (_size - idx) * sizeof(T));
-        _data[idx] = std::move(copy);
+        _data[idx] = value;
     }
     ++_size;
 }
