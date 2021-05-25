@@ -43,17 +43,13 @@ ListStack<T>::ListStack(ListStack<T>&& other) noexcept {
 
 template<class T>
 ListStack<T>& ListStack<T>::operator=(const ListStack& other) {
-    if (this != &other) {
-        *this = ListStack(other);
-    }
+    _list = other._list;
     return *this;
 }
 
 template<class T>
 ListStack<T>& ListStack<T>::operator=(ListStack&& other) noexcept {
-    if (this != &other) {
-        _list = std::move(other._list);
-    }
+    _list = std::move(other._list);
     return *this;
 }
 

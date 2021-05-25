@@ -3,7 +3,8 @@
 #include "Vector/vector.h"
 #include "Stack/Stack.h"
 #include "Queue/Queue.h"
-
+#include "profile.h"
+#include "Stack/VectorStack.h"
 template<class T>
 bool isOdd(const T& val) {
     return val % 2 == 1;
@@ -30,12 +31,9 @@ T addFive(const T& val) {
 int main() {
 
 
-Stack<int> q(StackContainer::Vector);
-    q.push(3);
+Stack<int> q(StackContainer::List);
 
-    q.push(4);
-    q.pop();
-auto q1(q);
+    auto q1(q);
 
 
 std::cout << q.top();

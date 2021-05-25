@@ -43,17 +43,13 @@ VectorStack<T>::VectorStack(VectorStack<T>&& other) noexcept {
 
 template<class T>
 VectorStack<T>& VectorStack<T>::operator=(const VectorStack& other) {
-    if (this != &other) {
-        *this = VectorStack(other);
-    }
+    _vector = other._vector;
     return *this;
 }
 
 template<class T>
 VectorStack<T>& VectorStack<T>::operator=(VectorStack&& other) noexcept {
-    if (this != &other) {
-        _vector = std::move(other._vector);
-    }
+    _vector = std::move(other._vector);
     return *this;
 }
 

@@ -46,17 +46,13 @@ ListQueue<T>::ListQueue(ListQueue<T>&& other) noexcept {
 
 template<class T>
 ListQueue<T>& ListQueue<T>::operator=(const ListQueue& other) {
-    if (this != &other) {
-        *this = ListQueue(other);
-    }
+    _list = other._list;
     return *this;
 }
 
 template<class T>
 ListQueue<T>& ListQueue<T>::operator=(ListQueue&& other) noexcept {
-    if (this != &other) {
-        _list = std::move(other._list);
-    }
+    _list = std::move(other._list);
     return *this;
 }
 

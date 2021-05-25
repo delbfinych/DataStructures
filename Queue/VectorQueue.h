@@ -42,17 +42,13 @@ VectorQueue<T>::VectorQueue(VectorQueue<T>&& other) noexcept {
 
 template<class T>
 VectorQueue<T>& VectorQueue<T>::operator=(const VectorQueue& other) {
-    if (this != &other) {
-        *this = VectorQueue(other);
-    }
+    _vector = other._vector;
     return *this;
 }
 
 template<class T>
 VectorQueue<T>& VectorQueue<T>::operator=(VectorQueue&& other) noexcept {
-    if (this != &other) {
-        _vector = std::move(other._vector);
-    }
+    _vector = std::move(other._vector);
     return *this;
 }
 
