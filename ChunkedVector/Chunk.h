@@ -7,8 +7,10 @@ public:
     Chunk(size_t size);
     ~Chunk() = default;
 
+    // пуш справа налево(для пушфронт)
     void pushRight(const T& value);
     void popRight();
+    // пуш слева направо(для пушбек)
     void pushLeft(const T& value);
     void popLeft();
 
