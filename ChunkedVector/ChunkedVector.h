@@ -45,6 +45,7 @@ void ChunkedVector<T>::pushFront(const T& value) {
     if (!_head->canPushRight()) {
         _map.pushFront(new Chunk<T>(_chunkSize));
         _head = _map[0];
+        ++_tailIdx;
     }
     _head->pushRight(value);
 }

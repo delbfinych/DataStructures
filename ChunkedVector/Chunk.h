@@ -106,5 +106,5 @@ bool Chunk<T>::canPushRight() const {
 
 template<class T>
 bool Chunk<T>::canPushLeft() const {
-    return _lIdx != _vector.capacity() - 1 && _size != _vector.capacity();
+    return _lIdx - 1 != _vector.capacity() - 1 && _size != _vector.capacity();
 }
