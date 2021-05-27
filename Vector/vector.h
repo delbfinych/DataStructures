@@ -143,15 +143,21 @@ void Vector<T>::pushFront(const T& value) {
     insert(0, value);
 }
 
-// TODO: throw
+
 template <class T>
 const T& Vector<T>::at(size_t idx) const {
+    if (idx >= _capacity) {
+        throw std::range_error("at(): Invalid pos");
+    }
     return _data[idx];
 }
 
-// TODO: throw
+
 template <class T>
 T& Vector<T>::at(size_t idx) {
+    if (idx >= _capacity) {
+        throw std::range_error("at(): Invalid pos");
+    }
     return _data[idx];
 }
 
