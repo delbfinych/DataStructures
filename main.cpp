@@ -7,7 +7,7 @@
 #include "Stack/VectorStack.h"
 #include "ChunkedVector/ChunkedVector.h"
 #include <vector>
-template<class T>
+
 
 
 int main() {

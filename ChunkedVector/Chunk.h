@@ -1,6 +1,5 @@
 #pragma once
 #include "../Vector/vector.h"
-using ll = long long;
 template <class T>
 class Chunk {
 public:
@@ -27,8 +26,8 @@ public:
 private:
     Vector<T> _vector;
     size_t _size;
-    ll _rIdx;
-    ll _lIdx;
+    size_t _rIdx;
+    size_t _lIdx;
 };
 
 template<class T>
