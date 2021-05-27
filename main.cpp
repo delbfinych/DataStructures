@@ -8,27 +8,7 @@
 #include "ChunkedVector/ChunkedVector.h"
 #include <vector>
 template<class T>
-bool isOdd(const T& val) {
-    return val % 2 == 1;
-}
 
-template<class T>
-bool isEven(const T& val) {
-    return !isOdd(val);
-}
-
-template<class T>
-void kek(T& val, size_t i) {
-    if (i == 0) val = 228;
-    else if (i == 2) val = 1488;
-    else val = 42;
-
-}
-
-template<class T>
-T addFive(const T& val) {
-    return val + 5;
-}
 
 int main() {
 

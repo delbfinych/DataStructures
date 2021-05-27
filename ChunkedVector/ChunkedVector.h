@@ -22,10 +22,8 @@ public:
 
 private:
     Vector<Chunk<T>*> _map;
-    size_t _headSize;
     size_t _chunkSize;
     size_t _tailIdx;
-    size_t _begin; // _begin = _head->capacity() - _head->size() - 1;
     Chunk<T>* _head;
     Chunk<T>* _tail;
 };
