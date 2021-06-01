@@ -21,6 +21,9 @@ public:
     size_t size() const;
     bool isEmpty() const;
 
+    T& operator[](size_t i);
+    const T& operator[](size_t i) const;
+
     bool canPushRight() const;
     bool canPushLeft() const;
 private:
@@ -107,4 +110,14 @@ bool Chunk<T>::canPushRight() const {
 template<class T>
 bool Chunk<T>::canPushLeft() const {
     return _lIdx - 1 != _vector.capacity() - 1 && _size != _vector.capacity();
+}
+
+template<class T>
+T& Chunk<T>::operator[](size_t i) {
+    return _vector[i];
+}
+
+template<class T>
+const T& Chunk<T>::operator[](size_t i) const {
+    return _vector[i];
 }
