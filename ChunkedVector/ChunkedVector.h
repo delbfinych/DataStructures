@@ -21,30 +21,6 @@ public:
     T& operator[](size_t i);
     const T& operator[](size_t i) const;
 
-    class Iterator {
-    protected:
-        T* _ptr;
-        size_t _idx;
-    public:
-        Iterator(T* ptr, size_t idx);
-        Iterator(const Iterator& it);
-
-        Iterator operator+(size_t n);
-        Iterator operator-(size_t n);
-
-        Iterator& operator++ ();
-        Iterator& operator-- ();
-
-        Iterator operator++ (int);
-        Iterator operator-- (int);
-
-        bool operator!=(const Iterator& it) const;
-        bool operator==(const Iterator& it ) const;
-
-        T& operator*() const;
-    };
-    Iterator begin() const { return Iterator(&_head->front(), 0); };
-    Iterator end() const { return Iterator(&(*_tail)[_tail->size()], size() - 1); };
 private:
     Vector<Chunk<T>*> _map;
     size_t _chunkSize;
@@ -54,57 +30,6 @@ private:
 
     size_t frontOffset();
 };
-
-template<class T>
-ChunkedVector<T>::Iterator::Iterator(T* ptr, size_t idx): _ptr(ptr), _idx(idx) {}
-
-template<class T>
-ChunkedVector<T>::Iterator::Iterator(const ChunkedVector::Iterator& it): _ptr(it._ptr), _idx(it._idx) {}
-
-//template<class T>
-//typename ChunkedVector<T>::Iterator ChunkedVector<T>::Iterator::operator+(size_t n) {
-//    return ChunkedVector::Iterator(operator[](_idx + n), _idx + n);
-//}
-//
-//template<class T>
-//typename ChunkedVector<T>::Iterator ChunkedVector<T>::Iterator::operator-(size_t n) {
-//    return ;
-//}
-//
-//template<class T>
-//typename ChunkedVector<T>::Iterator& ChunkedVector<T>::Iterator::operator++() {
-////    return <#initializer#>;
-//}
-//
-//template<class T>
-//typename ChunkedVector<T>::Iterator& ChunkedVector<T>::Iterator::operator--() {
-////    return <#initializer#>;
-//}
-//
-//template<class T>
-//typename ChunkedVector<T>::Iterator ChunkedVector<T>::Iterator::operator++(int) {
-////    return ChunkedVector::Iterator(nullptr);
-//}
-//
-//template<class T>
-//typename ChunkedVector<T>::Iterator ChunkedVector<T>::Iterator::operator--(int) {
-////    return ChunkedVector::Iterator(nullptr);
-//}
-//
-//template<class T>
-//bool ChunkedVector<T>::Iterator::operator!=(const ChunkedVector::Iterator& it) const {
-//    return  _ptr != it._ptr;
-//}
-//
-//template<class T>
-//bool ChunkedVector<T>::Iterator::operator==(const ChunkedVector::Iterator& it) const {
-//    return  _ptr == it._ptr;
-//}
-//
-//template<class T>
-//T& ChunkedVector<T>::Iterator::operator*() const {
-//    return _ptr;
-//}
 
 template<class T>
 ChunkedVector<T>::ChunkedVector(size_t chunkSize) {
@@ -134,6 +59,7 @@ void ChunkedVector<T>::popFront() {
 
     if (_head->size() == 0) {
         _map.erase(0);
+        // TODO: if
         _head = _map[0];
     }
 

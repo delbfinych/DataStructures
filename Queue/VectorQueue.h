@@ -1,11 +1,12 @@
 #pragma once
 #include "./QueueImplementation.h"
 #include "../Vector/vector.h"
-
+#include <stdexcept>
 
 template <class T>
 class VectorQueue : public QueueImplementation<T> {
     Vector<T> _vector;
+    size_t _begin;
 public:
     VectorQueue();
     VectorQueue(const VectorQueue<T>& other);
@@ -28,16 +29,19 @@ public:
 template<class T>
 VectorQueue<T>::VectorQueue() {
     _vector = Vector<T>();
+    _begin  = 0;
 }
 
 template<class T>
 VectorQueue<T>::VectorQueue(const VectorQueue<T>& other) {
     _vector = other._vector;
+    _begin  = other._begin;
 }
 
 template<class T>
 VectorQueue<T>::VectorQueue(VectorQueue<T>&& other) noexcept {
     _vector = std::move(other._vector);
+    _begin  = other._begin;
 }
 
 template<class T>
@@ -59,25 +63,34 @@ void VectorQueue<T>::push(const T& value) {
 
 template<class T>
 void VectorQueue<T>::pop() {
-    _vector.erase(0);
+    if (!isEmpty()) {
+        ++_begin;
+    }
+//    _vector.erase(0);
 }
 
 template<class T>
 const T& VectorQueue<T>::front() const {
-    return _vector[0];
+    if (isEmpty()) {
+        throw std::range_error("Queue is empty");
+    }
+    return _vector[_begin];
 }
 
 template<class T>
 T& VectorQueue<T>::front() {
-    return _vector[0];
+    if (isEmpty()) {
+        throw std::range_error("Queue is empty");
+    }
+    return _vector[_begin];
 }
 
 template<class T>
 bool VectorQueue<T>::isEmpty() const {
-    return _vector.size() == 0;
+    return _begin == _vector.size();
 }
 
 template<class T>
 size_t VectorQueue<T>::size() const {
-    return _vector.size();
+    return _vector.size() - _begin;
 }

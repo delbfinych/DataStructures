@@ -8,7 +8,6 @@
 enum class QueueContainer {
     Vector = 0,
     List,
-
 };
 
 
@@ -62,9 +61,8 @@ Queue<T>::Queue(const T* valueArray, size_t arraySize, QueueContainer container)
 }
 
 template<class T>
-Queue<T>::Queue(const Queue& other): Queue<T>(other._containerType) {
-
-
+Queue<T>::Queue(const Queue& other) {
+    _containerType = other._containerType;
     switch (_containerType)
     {
         case QueueContainer::List: {

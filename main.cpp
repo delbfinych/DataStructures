@@ -16,39 +16,33 @@ int main() {
 Vector<int>v1;
 v1.reserve(5);
 v1[3] = 33;
-
-    v.pushFront(0);
-    v.pushFront(1);
-    v.pushFront(2);
-    v.pushFront(3);
-    v.pushFront(4);
-
-    v.pushBack(0);
-    v.pushBack(1);
-    v.pushBack(2);
-    v.pushBack(3);
-    v.pushBack(4);
-
-    v.pushFront(-10);
-for(int i = 0; i < v.size(); ++i) {
-    std::cout << v[i] << " ";
-}
-//for (auto kek: v) {
-//    std:: cout << *kek << " ";
-//}
-//  v.pushBack(3);
-//  v.pushBack(4);
-//  v.pushBack(10);
+//
 //    v.pushFront(0);
-//    v.pushFront(-1);
-//    v.pushFront(-3);
-//    auto t = v.back();
-//    auto k = v.front();
-//    v.popFront();
-//    auto kk = v.front();
-//    v.popBack();
-//    auto tt = v.back();
-//    size_t s = v.size();
+//    v.pushFront(1);
+//    v.pushFront(2);
+//    v.pushFront(3);
+//    v.pushFront(4);
+//
+//    v.pushBack(0);
+//    v.pushBack(1);
+//    v.pushBack(2);
+//    v.pushBack(3);
+//    v.pushBack(4);
+//
+//    v.pushFront(-10);
+//for(int i = 0; i < v.size(); ++i) {
+//    std::cout << v[i] << " ";
+//}
+Queue<int> q;
+q.push(1);
+q.push(2);
+q.push(3);
+
+q.pop();
+q.pop();
+auto kk = q.front();
+q.pop();
+auto k = q.front();
 //std::cout << s;
 //Stack<int> q(StackContainer::List);
 //

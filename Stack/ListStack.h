@@ -1,7 +1,7 @@
 #pragma once
 
 #include "StackImplementation.h"
-#include "../SinglyLinkedList/List.h" // меняете на include вашего листа
+#include "../SinglyLinkedList/List.h"
 
 
 template <class T>

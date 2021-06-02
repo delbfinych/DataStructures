@@ -9,7 +9,6 @@
 enum class StackContainer {
 	Vector = 0,
 	List,
-
 };
 
 
@@ -18,7 +17,7 @@ class Stack
 {
 public:
 	Stack(StackContainer container = StackContainer::Vector);
-	// элементы массива последовательно подкладываются в стек
+
 	Stack(const T* valueArray, size_t arraySize,
           StackContainer container = StackContainer::Vector);
 
@@ -72,7 +71,8 @@ Stack<T>::Stack(const T* valueArray, const size_t arraySize, StackContainer cont
 }
 
 template <class T>
-Stack<T>::Stack(const Stack& other): Stack<T>(other._containerType) {
+Stack<T>::Stack(const Stack& other) {
+    _containerType = other._containerType;
     switch (_containerType)
     {
         case StackContainer::List: {
