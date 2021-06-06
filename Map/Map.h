@@ -8,7 +8,10 @@ namespace {
     public:
         T1 fst;
         T2 snd;
-        explicit Pair(T1 fst = T1(), T2 snd = T2()):fst(fst), snd(snd) {}
+        explicit Pair(const T1& fst = T1(),
+                      const T2& snd = T2())
+                      :fst(fst), snd(snd)
+                      {}
 
         bool operator==(const Pair& lp) const {
             return fst == lp.fst;
@@ -41,6 +44,7 @@ public:
     Map& operator=(const Map& other);
     Map& operator=(Map&& other);
 
+    //TODO
     ~Map() = default;
 
     void add(const K& key, const V& val) override;
@@ -76,10 +80,22 @@ Map<K, V>::Map() {
 
 template<class K, class V>
 Map<K, V>::Map(const Map& other) {
-
+    _tree = other._tree;
 }
 
 template<class K, class V>
 Map<K, V>::Map(Map&& other) {
-    _tree = std::exchange(other._tree);
+    _tree = std::move(other._tree)
+}
+
+template<class K, class V>
+Map<K,V>& Map<K, V>::operator=(const Map& other) {
+    _tree = other._tree;
+    return *this;
+}
+
+template<class K, class V>
+Map<K,V>& Map<K, V>::operator=(Map&& other) {
+    _tree = std::move(other._tree);
+    return *this;
 }
