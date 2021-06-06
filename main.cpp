@@ -7,15 +7,25 @@
 #include "Stack/VectorStack.h"
 #include "ChunkedVector/ChunkedVector.h"
 #include <vector>
-
-
-
+#include "Map/BST.h"
+#include "Map/Map.h"
+#include <string>
 int main() {
 
   ChunkedVector<int> v(3);
-Vector<int>v1;
-v1.reserve(5);
-v1[3] = 33;
+
+
+Map<std::string,int> t;
+t.add("010", 2);
+t.add("005", 9);
+t.add("017", 4);
+t.add("031", 4);
+t.add("004",3);
+t.add("007",8);
+t.add("008",1);
+
+
+
 //
 //    v.pushFront(0);
 //    v.pushFront(1);
@@ -33,17 +43,17 @@ v1[3] = 33;
 //for(int i = 0; i < v.size(); ++i) {
 //    std::cout << v[i] << " ";
 //}
-Queue<int> q;
-q.push(1);
-q.push(2);
-q.push(3);
-
-q.pop();
-q.pop();
-auto kk = q.front();
-q.pop();
-auto k = q.front();
-//std::cout << s;
+//Queue<int> q;
+//q.push(1);
+//q.push(2);
+//q.push(3);
+//
+//q.pop();
+//q.pop();
+//auto kk = q.front();
+//q.pop();
+//auto k = q.front();
+////std::cout << s;
 //Stack<int> q(StackContainer::List);
 //
 //    auto q1(q);
