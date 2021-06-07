@@ -51,7 +51,6 @@ public:
     void remove(const K& key) override;
     const V& find(const K& key) const override;
     const V& operator[](const K& key) const;
-
 private:
     BST<Pair<K,V>> _tree;
 };
