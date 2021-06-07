@@ -1,7 +1,7 @@
 #pragma once
 #include <utility>
 #include <stdexcept>
-
+#include "../Queue/Queue.h"
 template <class T>
 class BST {
     class Node {
@@ -29,6 +29,7 @@ public:
     void insert(const T& val);
     void remove(const T& val);
     const T& find(const T& val) const;
+    const T& operator[](const T& val) const;
 //    T& find(const T& val);
 
 private:
@@ -42,8 +43,20 @@ BST<T>::BST() {
 }
 
 template<class T>
-BST<T>::BST(const BST& other) {
+BST<T>::BST(const BST& other): BST() {
+    Queue<Node*> q;
+    q.push(other._root);
 
+    while(!q.isEmpty()) {
+        Node* node = q.front();
+        q.pop();
+        if (!node) {
+            continue;
+        }
+        insert(node->data);
+        q.push(node->left);
+        q.push(node->right);
+    }
 }
 
 template<class T>
@@ -188,12 +201,11 @@ void BST<T>::_removeNode(BST::Node* node, BST::Node* parent) {
         node->data = ptr->data;
         return _removeNode(ptr, par);
     }
+}
 
-
-
-
-
-
+template<class T>
+const T& BST<T>::operator[](const T& val) const {
+    return find(val);
 }
 
 //template<class T>

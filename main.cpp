@@ -16,6 +16,8 @@ int main() {
 
 
 Map<std::string,int> t;
+
+
 t.add("010", 2);
 t.add("005", 9);
 t.add("017", 4);
@@ -23,8 +25,7 @@ t.add("031", 4);
 t.add("004",3);
 t.add("007",8);
 t.add("008",1);
-
-
+    Map<std::string,int> L(t);
 
 //
 //    v.pushFront(0);

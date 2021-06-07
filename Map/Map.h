@@ -50,6 +50,7 @@ public:
     void add(const K& key, const V& val) override;
     void remove(const K& key) override;
     const V& find(const K& key) const override;
+    const V& operator[](const K& key) const;
 
 private:
     BST<Pair<K,V>> _tree;
@@ -85,7 +86,7 @@ Map<K, V>::Map(const Map& other) {
 
 template<class K, class V>
 Map<K, V>::Map(Map&& other) {
-    _tree = std::move(other._tree)
+    _tree = std::move(other._tree);
 }
 
 template<class K, class V>
@@ -98,4 +99,9 @@ template<class K, class V>
 Map<K,V>& Map<K, V>::operator=(Map&& other) {
     _tree = std::move(other._tree);
     return *this;
+}
+
+template<class K, class V>
+const V& Map<K, V>::operator[](const K& key) const {
+    return find(key);
 }
