@@ -215,18 +215,6 @@ const T& BST<T>::operator[](const T& val) const {
 template<class T>
 void BST<T>::forEach(void (* callback)(T&)) {
     _traverse(_root, callback);
-
-//    while(!st.isEmpty()) {
-//        auto node = st.top();
-//        st.pop();
-//        if (!node) {
-//            continue;
-//        }
-//        st.push(node->right);
-//        callback(node->data);
-//        st.push(node->left);
-//    }
-
 }
 
 template<class T>
@@ -239,9 +227,3 @@ void BST<T>::_traverse(BST::Node* node, void (* cb)(T&)) {
     cb(node->data);
     _traverse(node->right, cb);
 }
-
-//template<class T>
-//T& BST<T>::find(const T& val) {
-//
-//}
-
