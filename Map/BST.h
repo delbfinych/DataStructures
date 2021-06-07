@@ -2,6 +2,7 @@
 #include <utility>
 #include <stdexcept>
 #include "../Queue/Queue.h"
+#include "../Stack/Stack.h"
 template <class T>
 class BST {
     class Node {
@@ -30,10 +31,13 @@ public:
     void remove(const T& val);
     const T& find(const T& val) const;
     const T& operator[](const T& val) const;
+
+    void forEach(void (*callback)(T& val));
 //    T& find(const T& val);
 
 private:
     void _removeNode(Node* node, Node* parent);
+    void _traverse(Node* node, void (*cb)(T&));
     Node* _root;
 };
 
@@ -206,6 +210,34 @@ void BST<T>::_removeNode(BST::Node* node, BST::Node* parent) {
 template<class T>
 const T& BST<T>::operator[](const T& val) const {
     return find(val);
+}
+
+template<class T>
+void BST<T>::forEach(void (* callback)(T&)) {
+    _traverse(_root, callback);
+
+//    while(!st.isEmpty()) {
+//        auto node = st.top();
+//        st.pop();
+//        if (!node) {
+//            continue;
+//        }
+//        st.push(node->right);
+//        callback(node->data);
+//        st.push(node->left);
+//    }
+
+}
+
+template<class T>
+void BST<T>::_traverse(BST::Node* node, void (* cb)(T&)) {
+    if(!node->left && !node->right) {
+        cb(node->data);
+        return;
+    }
+    _traverse(node->left, cb);
+    cb(node->data);
+    _traverse(node->right, cb);
 }
 
 //template<class T>

@@ -10,22 +10,33 @@
 #include "Map/BST.h"
 #include "Map/Map.h"
 #include <string>
+void addFive(int& k) {
+    k += 5;
+}
+void print(int& k) {
+    std::cout << k <<" ";
+}
 int main() {
 
   ChunkedVector<int> v(3);
+BST<int> b;
+b.insert(10);
+b.insert(9);
+b.insert(11);
+b.forEach(addFive);
+b.forEach(print);
 
-
-Map<std::string,int> t;
-
-
-t.add("010", 2);
-t.add("005", 9);
-t.add("017", 4);
-t.add("031", 4);
-t.add("004",3);
-t.add("007",8);
-t.add("008",1);
-    Map<std::string,int> L(t);
+//Map<std::string,int> t;
+//
+//
+//t.add("010", 2);
+//t.add("005", 9);
+//t.add("017", 4);
+//t.add("031", 4);
+//t.add("004",3);
+//t.add("007",8);
+//t.add("008",1);
+//    Map<std::string,int> L(t);
 
 //
 //    v.pushFront(0);
