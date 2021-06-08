@@ -197,7 +197,7 @@ void BST<T>::_removeNode(BST::Node* node, BST::Node* parent) {
     else {
         Node* ptr = node->right;
         Node* par = parent;
-        // поиск самого левого
+       
         while (ptr->left) {
             par = ptr;
             ptr = ptr->left;
