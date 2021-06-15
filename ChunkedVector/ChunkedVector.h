@@ -1,6 +1,10 @@
 #pragma once
 #include "../Vector/vector.h"
 #include "Chunk.h"
+#include <memory>
+
+using std::make_shared, std::shared_ptr;
+
 template <class T>
 class ChunkedVector {
 public:
@@ -22,11 +26,11 @@ public:
     const T& operator[](size_t i) const;
 
 private:
-    Vector<Chunk<T>*> _map;
+    Vector<shared_ptr<Chunk<T>>> _map;
     size_t _chunkSize;
     size_t _tailIdx;
-    Chunk<T>* _head;
-    Chunk<T>* _tail;
+    shared_ptr<Chunk<T>> _head;
+    shared_ptr<Chunk<T>> _tail;
 
     size_t frontOffset();
 };
@@ -35,7 +39,7 @@ template<class T>
 ChunkedVector<T>::ChunkedVector(size_t chunkSize) {
     _chunkSize = chunkSize;
 
-    _map.pushBack(new Chunk<T>(chunkSize));
+    _map.pushBack(std::make_shared<Chunk<T>>(chunkSize));
     _head = _tail = _map[0];
 
     _tailIdx = 0;
@@ -45,10 +49,16 @@ ChunkedVector<T>::ChunkedVector(size_t chunkSize) {
 
 template<class T>
 void ChunkedVector<T>::pushFront(const T& value) {
-    if (!_head->canPushRight()) {
-        _map.pushFront(new Chunk<T>(_chunkSize));
-        _head = _map[0];
-        ++_tailIdx;
+    if (!_head || !_head->canPushRight()) {
+        _map.pushFront(std::make_shared<Chunk<T>>(_chunkSize));
+
+        if (!_head) {
+            _tail = _head = _map[0];
+        }
+        else {
+            _head = _map[0];
+        }
+
     }
     _head->pushRight(value);
 }
@@ -59,18 +69,32 @@ void ChunkedVector<T>::popFront() {
 
     if (_head->size() == 0) {
         _map.erase(0);
-        // TODO: if
-        _head = _map[0];
+        if (_map.size()) {
+            _head = _map[0];
+        }
+        else {
+            _head = _tail = nullptr;
+            _tailIdx = 0;
+        }
+
     }
 
 }
 
 template<class T>
 void ChunkedVector<T>::pushBack(const T& value) {
-    if (!_tail->canPushLeft()) {
-        _map.pushBack(new Chunk<T>(_chunkSize));
-        ++_tailIdx;
-        _tail = _map[_tailIdx];
+    if (!_tail || !_tail->canPushLeft()) {
+        _map.pushBack(std::make_shared<Chunk<T>>(_chunkSize));
+
+        if (!_tail) {
+            _head =  _tail = _map[_tailIdx];
+        }
+        else {
+            ++_tailIdx;
+            _tail = _map[_tailIdx];
+        }
+
+
     }
     _tail->pushLeft(value);
 }
@@ -80,8 +104,14 @@ void ChunkedVector<T>::popBack() {
     _tail->popLeft();
 
     if (_tail->size() == 0) {
-        --_tailIdx;
-        _tail = _map[_tailIdx];
+        _map.popBack();
+        if (_map.size()) {
+            --_tailIdx;
+            _tail = _map[_tailIdx];
+        }
+        else {
+            _tail = _head = nullptr;
+        }
     }
 }
 
@@ -107,10 +137,14 @@ T& ChunkedVector<T>::front() {
 
 template<class T>
 size_t ChunkedVector<T>::size() {
-    auto middleCellCount = &(_map[_map.size() - 1]) - &(_map[0]) - 1;
+    if (!_head) {
+        return 0;
+    }
     if (_head == _tail) {
         return _head->size();
     }
+    auto middleCellCount = &(_map[_map.size() - 1]) - &(_map[0]) - 1;
+
     return  _head->size() + middleCellCount * _chunkSize + _tail->size();
 
 }
