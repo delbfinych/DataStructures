@@ -39,7 +39,7 @@ template<class T>
 ChunkedVector<T>::ChunkedVector(size_t chunkSize) {
     _chunkSize = chunkSize;
 
-    _map.pushBack(std::make_shared<Chunk<T>>(chunkSize));
+    _map.pushBack(make_shared<Chunk<T>>(chunkSize));
     _head = _tail = _map[0];
 
     _tailIdx = 0;
@@ -50,7 +50,7 @@ ChunkedVector<T>::ChunkedVector(size_t chunkSize) {
 template<class T>
 void ChunkedVector<T>::pushFront(const T& value) {
     if (!_head || !_head->canPushRight()) {
-        _map.pushFront(std::make_shared<Chunk<T>>(_chunkSize));
+        _map.pushFront(make_shared<Chunk<T>>(_chunkSize));
 
         if (!_head) {
             _tail = _head = _map[0];
@@ -84,7 +84,7 @@ void ChunkedVector<T>::popFront() {
 template<class T>
 void ChunkedVector<T>::pushBack(const T& value) {
     if (!_tail || !_tail->canPushLeft()) {
-        _map.pushBack(std::make_shared<Chunk<T>>(_chunkSize));
+        _map.pushBack(make_shared<Chunk<T>>(_chunkSize));
 
         if (!_tail) {
             _head =  _tail = _map[_tailIdx];
