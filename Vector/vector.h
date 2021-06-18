@@ -203,6 +203,8 @@ Vector<T>::Vector(const Vector& other) {
     _data = allocate(other._size);
     memcpy(_data, other._data, sizeof(T) * other._size);
     _size = _capacity = other._size;
+    _coef = other._coef;
+    _strategy = other._strategy;
 }
 
 template <class T>
@@ -210,6 +212,8 @@ Vector<T>::Vector(Vector&& other) noexcept {
     _data     = std::exchange(other._data, nullptr);
     _size     = std::exchange(other._size, 0);
     _capacity = std::exchange(other._capacity, 0);
+    _coef     = std::exchange(other._coef, 2);
+    _strategy = std::exchange(other._strategy, ResizeStrategy::Multiplicative);
 }
 
 template <class T>
@@ -311,6 +315,8 @@ Vector<T>& Vector<T>::operator=(Vector&& other) noexcept {
         _data     = std::exchange(other._data, nullptr);
         _size     = std::exchange(other._size, 0);
         _capacity = std::exchange(other._capacity, 0);
+        _coef     = std::exchange(other._coef, 2);
+        _strategy = std::exchange(other._strategy, ResizeStrategy::Multiplicative);
     }
     return *this;
 }
