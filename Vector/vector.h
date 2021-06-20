@@ -163,8 +163,9 @@ T& Vector<T>::at(size_t idx) {
 
 template <class T>
 void Vector<T>::clear() {
-    // remove content
+    deallocate(_data);
     _size = 0;
+    _data = allocate(_capacity);
 }
 
 template <class T>
@@ -277,7 +278,6 @@ void Vector<T>::reserve(size_t newCapacity) {
     }
     _capacity = newCapacity;
     auto newData = allocate(newCapacity);
-    // TODO: move instead of copy?
     if (_data) {
         memcpy(newData, _data, _size * sizeof(T));
         deallocate(_data);
